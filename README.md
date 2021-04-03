@@ -44,12 +44,14 @@ Create the network, documentDB,Cloud9 and initial DMS resources using cloudforma
 sudo yum install -y mongodb-org-shell
 sudo yum install -y mongodb-org-tools-4.0.18
 wget https://raw.githubusercontent.com/roberthryniewicz/datasets/master/airline-dataset/flights/flights.csv
+wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 ```
 * import the flights data (replace the host with your documentDB host name) and verify the collection
 ```bash
 mongoimport  --ssl --host dbcluster-juqniyxtumbk.cluster-cykwyngishlk.us-east-1.docdb.amazonaws.com:27017 --sslCAFile rds-combined-ca-bundle.pem --username dbmaster --password dbmaster123 --type csv --file airports.txt --collection=flightCol --db=flights --headerline
-use flights
-db.flightCol.find( {} )
+mongo --ssl --host dbcluster-juqniyxtumbk.cluster-cykwyngishlk.us-east-1.docdb.amazonaws.com:27017 --sslCAFile rds-combined-ca-bundle.pem --username dbmaster --password dbmaster123
+rs0:PRIMARY> use flights
+rs0:PRIMARY> db.flightCol.find( {} )
 ```
 ## Complete DMS steps
 The cloudFormation script does not support setting up the DMS endpoint for DocumentDB.  Using CLI bash scripts for the remaining setup
