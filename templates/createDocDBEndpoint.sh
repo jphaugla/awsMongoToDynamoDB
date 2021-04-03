@@ -1,0 +1,11 @@
+aws dms create-endpoint \
+           --endpoint-identifier sourcedocumentdb \
+           --endpoint-type source \
+           --engine-name docdb \
+           --username dbmaster \
+           --password dbmaster123 \
+           --server-name dbcluster-juqniyxtumbk.cluster-cykwyngishlk.us-east-1.docdb.amazonaws.com \
+           --port 27017 \
+           --database-name flights \
+           --ssl-mode verify-full \
+           --certificate-arn arn:aws:dms:us-east-1:569119288395:cert:C7QG63JYVGVQF4D2CRW2WO5KKRYWWOD63L35MQQ
