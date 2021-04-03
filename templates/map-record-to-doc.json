@@ -1,33 +1,40 @@
 {
-	"rules": [
-		{
-			"rule-type": "selection",
-			"rule-id": "1",
-			"rule-name": "1",
-			"object-locator": {
-				"schema-name": "flights",
-				"table-name": "flightCol"
-			},
-			"rule-action": "include"
-		},
-		{
-			"rule-type": "object-mapping",
-			"rule-id": "2",
-			"rule-name": "2",
-			"rule-action": "map-record-to-document",
-			"object-locator": {
-				"schema-name": "flights",
-				"table-name": "flightCol"
-			},
-			"target-table-name": "flightsdoc",
-                        "mapping-parameters": {
-				"partition-key-name": "old_id",
-				"exclude-columns":  [
-					"CancellationCode",
-					"Diverted"
-		                ]
-                        }
-
-		}
-	]
+    "rules": [
+        {
+            "rule-type": "selection",
+            "rule-id": "1",
+            "rule-name": "1",
+            "object-locator": {
+                "schema-name": "flights",
+                "table-name": "flightCol"
+            },
+            "rule-action": "include"
+        },
+        {
+            "rule-type": "object-mapping",
+            "rule-id": "2",
+            "rule-name": "2",
+            "rule-action": "map-record-to-document",
+            "object-locator": {
+                "schema-name": "flights",
+                "table-name": "flightCol"
+            },
+            "target-table-name": "flightsdoc",
+            "mapping-parameters": {
+                "partition-key-name": "old_id",
+                "exclude-columns": [
+                    "CancellationCode",
+                    "Diverted"
+                ],
+                "attribute-mappings": [
+                    {
+                        "target-attribute-name": "old_id",
+                        "attribute-type": "scalar",
+                        "attribute-sub-type": "string",
+                        "value": "${_id}"
+                    }
+                ]
+            }
+        }
+    ]
 }
