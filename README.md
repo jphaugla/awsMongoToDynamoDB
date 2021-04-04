@@ -56,6 +56,7 @@ rs0:PRIMARY> db.flightCol.find( {} )
 ## Complete DMS steps
 The cloudFormation script does not support setting up the DMS endpoint for DocumentDB.  Using CLI bash scripts for the remaining setup
 * download pem files create the DMS documentDB endpoint and the DMS replication task
+* NOTE:  each of these scripts needs to have the ARNs corrected for your current environment.  So, the createDocDBEndpoint.sh needs the documentDB cluster ARN and the ARN of the created cerficate.  The createReplicationTask.sh needs the ARN for the dynamoDB endpoint, the documentDB endpoint, and the replication instance ARN.
 ```bash
 cd templates
 wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
