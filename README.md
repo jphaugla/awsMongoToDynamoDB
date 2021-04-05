@@ -63,7 +63,7 @@ wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 ./getCertificates.sh
 ./createDocDBEndpoint.sh
 ./createReplicationTask.sh
-./starteReplication.sh
+./startReplication.sh
 ```
 ## Verify data
 [DynamoDB](https://console.aws.amazon.com/dynamodb)
