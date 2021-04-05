@@ -8,4 +8,4 @@ aws dms create-endpoint \
            --port 27017 \
            --database-name flights \
            --ssl-mode verify-full \
-           --certificate-arn arn:aws:dms:us-east-1:569119288395:cert:C7QG63JYVGVQF4D2CRW2WO5KKRYWWOD63L35MQQ
+           --certificate-arn <certificate arn>
