@@ -41,6 +41,7 @@ Create the network, documentDB,Cloud9 and initial DMS resources using cloudforma
 * Clink on Open IDE
 * install mongo binaries and get flights data
 ```bash
+echo -e "[mongodb-org-4.0] \nname=MongoDB Repository\nbaseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/4.0/x86_64/\ngpgcheck=1 \nenabled=1 \ngpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc" | sudo tee /etc/yum.repos.d/mongodb-org-4.0.repo
 sudo yum install -y mongodb-org-shell
 sudo yum install -y mongodb-org-tools-4.0.18
 wget https://raw.githubusercontent.com/roberthryniewicz/datasets/master/airline-dataset/flights/flights.csv
@@ -48,7 +49,7 @@ wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 ```
 * import the flights data (replace the host with your documentDB host name) and verify the collection
 ```bash
-mongoimport  --ssl --host dbcluster-juqniyxtumbk.cluster-cykwyngishlk.us-east-1.docdb.amazonaws.com:27017 --sslCAFile rds-combined-ca-bundle.pem --username dbmaster --password dbmaster123 --type csv --file airports.txt --collection=flightCol --db=flights --headerline
+mongoimport  --ssl --host dbcluster-juqniyxtumbk.cluster-cykwyngishlk.us-east-1.docdb.amazonaws.com:27017 --sslCAFile rds-combined-ca-bundle.pem --username dbmaster --password dbmaster123 --type csv --file flights.csv --collection=flightCol --db=flights --headerline
 mongo --ssl --host dbcluster-juqniyxtumbk.cluster-cykwyngishlk.us-east-1.docdb.amazonaws.com:27017 --sslCAFile rds-combined-ca-bundle.pem --username dbmaster --password dbmaster123
 rs0:PRIMARY> use flights
 rs0:PRIMARY> db.flightCol.find( {} )
@@ -60,9 +61,13 @@ The cloudFormation script does not support setting up the DMS endpoint for Docum
 ```bash
 cd templates
 wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
-./getCertificates.sh
+./createCertificates.sh > createCert.out
+# look a the createCert.out file to find the Certificate ARN needed for next script.
+# edit the creaeteDocDBEndpoint script afor the ARN and the cluster name.  Then run
 ./createDocDBEndpoint.sh
+#  use the docdb endpoint arn from this output.  Also edit the other ARN's for this environment
 ./createReplicationTask.sh
+# edit the replicationtask arn in next script and run
 ./startReplication.sh
 ```
 ## Verify data
