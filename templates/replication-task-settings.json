@@ -1,0 +1,35 @@
+
+{
+  "FullLoadSettings": {
+    "TargetTablePrepMode": "DO_NOTHING",
+    "CreatePkAfterFullLoad": false,
+    "StopTaskCachedChangesApplied": false,
+    "StopTaskCachedChangesNotApplied": false,
+    "MaxFullLoadSubTasks": 8,
+    "TransactionConsistencyTimeout": 600,
+    "CommitRate": 10000
+  },
+  "Logging": {
+    "EnableLogging": true
+  },
+  "ErrorBehavior": {
+    "DataErrorPolicy": "LOG_ERROR",
+    "DataTruncationErrorPolicy":"LOG_ERROR",
+    "DataErrorEscalationPolicy":"SUSPEND_TABLE",
+    "DataErrorEscalationCount": 50,
+    "TableErrorPolicy":"SUSPEND_TABLE",
+    "TableErrorEscalationPolicy":"STOP_TASK",
+    "TableErrorEscalationCount": 50,
+    "RecoverableErrorCount": 0,
+    "RecoverableErrorInterval": 5,
+    "RecoverableErrorThrottling": true,
+    "RecoverableErrorThrottlingMax": 1800,
+    "ApplyErrorDeletePolicy":"IGNORE_RECORD",
+    "ApplyErrorInsertPolicy":"LOG_ERROR",
+    "ApplyErrorUpdatePolicy":"LOG_ERROR",
+    "ApplyErrorEscalationPolicy":"LOG_ERROR",
+    "ApplyErrorEscalationCount": 0,
+    "FullLoadIgnoreConflicts": true
+  }
+}
+            
