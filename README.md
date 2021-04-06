@@ -73,3 +73,8 @@ wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 ## Verify data
 [DynamoDB](https://console.aws.amazon.com/dynamodb)
 * verify the rows are in the flights table
+## Cleanup
+The deletion of the clouldformation stack will clean up all the items created by the cloudformation script.  However, this will fail on items created outside of the script using resources created in the script.  So, for cleanup:
+* Delete the DMS replication task
+* Delete the docDB source endpoint
+* Delete the stack through cloudFormation
